@@ -1,0 +1,37 @@
+<!--pages/questionAnswer/questionAnswer.wxml-->
+<view>
+  <view class="topBackground"></view>
+  <!--文本框-->
+  <view>
+    <van-cell-group>
+      <van-field value="{{ message }}" type="textarea" placeholder="输入题目内容" autosize="{{textAutosize}}"
+        border="{{ false }}" bind:change="onChange" />
+    </van-cell-group>
+  </view>
+  <!--上传图片-->
+  <view class="uploadPictures">
+    <van-uploader file-list="{{ fileList }}" max-count="9" deletable="{{ true }}" show-upload="false"
+      bind:after-read="afterRead" bind:delete="deleteImg" />
+  </view>
+
+  <!--科目展示-->
+  <view class="subjects-show">
+    <view class="subjects-left">
+      <view>
+        <image class="subjectsShow-img" src="../../image/biaoqian.png"></image>
+      </view>
+      <view class="subjects-text">
+        <text class="subjectsText-item">一级建造师 管理</text>
+        <text class="subjectsText-explain">（选择您想要问的项目,科目）</text>
+      </view>
+    </view>
+    <view>
+      <van-icon name="arrow" color="#D8D8D8" size="12px" />
+    </view>
+  </view>
+
+  <!--发表按钮-->
+  <view class="publish-button">
+    <van-button color="#0998FF">发表</van-button>
+  </view>
+</view>

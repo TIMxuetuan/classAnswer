@@ -1,0 +1,69 @@
+<!--index.wxml-->
+<view class="container-index">
+  <!--头部和科目切换-->
+  <view class="head-module">
+    <view class="head-login">
+      <!--未注册-->
+      <view class="headLogin-item" wx:if="{{isThreeType == 1}}">
+        <view>
+          <image class="headLogin-img" src="../../image/morentouxing.png"></image>
+        </view>
+        <view class="noLogin">
+          <button class="noLoginBtn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击注册</button>
+        </view>
+      </view>
+      <!--未登录-->
+      <view class="headLogin-item" wx:elif="{{isThreeType == 2}}">
+        <view>
+          <image class="headLogin-img" src="../../image/morentouxing.png"></image>
+        </view>
+        <view class="noLogin">
+          <button class="noLoginBtn" open-type="getUserInfo" bindgetuserinfo="judgeUserInfo">点击登录</button>
+        </view>
+      </view>
+      <!--已注册登录-->
+      <view class="headLogin-item" wx:elif="{{isThreeType == 0}}">
+        <view>
+          <image class="headLogin-img" src="{{userInfoData.avatarUrl}}"></image>
+        </view>
+        <view class="usernoLogin">
+          <view>{{userInfoData.nickName}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!--切换科目-->
+    <view class="switch-subject" bindtap="switchCourse">
+      <view class="switchLeft">
+        <view class="switchLeft-title" wx:if="{{!isSelectSubject}}">请选择项目</view>
+        <view class="switchLeft-content" wx:else>
+          <view>管理</view>
+          <view>一级建造师</view>
+        </view>
+      </view>
+      <view>
+        <image class="switchImg" src="../../image/qiehuan.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!--中间内容--答疑解惑-->
+  <view class="photograph">
+    <image bindtap="goToQuestion" class="photographImg" src="../../image/paizhao.png"></image>
+  </view>
+
+  <!--历史记录-->
+  <view class="historyFile">
+    有新消息！快来查看历史记录
+  </view>
+</view>
+
+<van-popup show="{{ switchShow }}" position="top" custom-style="height: 60%;" bind:close="onClose">
+  <van-tree-select items="{{ items }}" height="360" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}"
+    bind:click-nav="onClickNav" bind:click-item="onClickItem" />
+</van-popup>
+
+<!--手机号授权提示弹窗-->
+<view class="">
+
+</view>

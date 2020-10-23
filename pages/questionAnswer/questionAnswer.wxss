@@ -1,0 +1,74 @@
+/* pages/questionAnswer/questionAnswer.wxss */
+.topBackground {
+  height: 16rpx;
+  background-color: #F1F1F1;
+}
+
+.uploadPictures {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30rpx;
+}
+
+.van-uploader__wrapper {
+  width: 690rpx !important;
+}
+
+.van-uploader__preview {
+  margin: 0 16rpx 16rpx 0 !important;
+}
+
+.van-uploader__preview:nth-child(4n) {
+  margin: 0 0 16rpx 0 !important;
+}
+
+.van-uploader__upload {
+  margin: 0 0 16rpx 0 !important;
+}
+
+/*科目展示*/
+.subjects-show {
+  width: 690rpx;
+  margin: 50rpx auto 0;
+  padding-bottom: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #F3F3F3;
+}
+
+.subjects-left{
+  display: flex;
+  align-items: center;
+}
+
+.subjectsShow-img {
+  width: 22rpx;
+  height: 22rpx;
+  margin-right: 26rpx;
+}
+
+.subjectsText-item {
+  font-size: 26rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.subjectsText-explain{
+  font-size: 24rpx;
+  color: #FBAD35;
+  font-weight: 500;
+}
+
+.publish-button{
+  margin: 350rpx 0 236rpx 0;
+  padding: 0 30rpx;
+}
+
+.publish-button .van-button{
+  width: 690rpx;
+  height: 100rpx;
+  padding: 0;
+  font-size: 36rpx;
+  font-weight: bold;
+}

@@ -1,0 +1,100 @@
+.head-module {
+  margin-top: 30rpx;
+  padding: 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head-login {}
+
+.headLogin-item {
+  display: flex;
+}
+
+.headLogin-img {
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 16rpx;
+}
+
+.noLogin button::after {
+  border: none;
+}
+
+.noLogin {
+  display: flex;
+  align-items: center;
+  height: 70rpx;
+}
+
+.usernoLogin{
+  width: 200rpx;
+  font-size: 28rpx;
+}
+
+.noLoginBtn {
+  width: 150rpx !important;
+  height: 70rpx;
+  background: #ffffff;
+  border-radius: 5rpx;
+  padding: 0;
+  color: #000000;
+  font-size: 28rpx;
+  line-height: 70rpx;
+}
+
+
+/*切换科目*/
+.switchLeft {
+  display: flex;
+  align-items: center;
+}
+
+.switchLeft-title {
+  font-size: 26rpx;
+  color: #252525;
+}
+
+.switchLeft-content {
+  text-align: right;
+}
+
+.switch-subject {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.switchImg {
+  width: 20rpx;
+  height: 26rpx;
+  margin-left: 26rpx;
+}
+
+/*答疑解惑*/
+.photograph {
+  margin-top: 180rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.photographImg {
+  width: 444rpx;
+  height: 444rpx;
+}
+
+.historyFile {
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #0998FF;
+  font-weight: 400;
+}
+
+/*上传图片*/
+.uploadPictures{
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+}
