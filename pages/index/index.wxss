@@ -28,8 +28,10 @@
   height: 70rpx;
 }
 
-.usernoLogin{
-  width: 200rpx;
+.usernoLogin {
+  /* width: 200rpx; */
+  display: flex;
+  align-items: center;
   font-size: 28rpx;
 }
 
@@ -94,7 +96,58 @@
 }
 
 /*上传图片*/
-.uploadPictures{
+.uploadPictures {
   padding: 0 30rpx;
   margin-top: 20rpx;
+}
+
+/*手机号弹窗*/
+.phone-module {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.module-write {
+  width: 520rpx;
+  height: 300rpx;
+  position: fixed;
+  z-index: 9500;
+  left: 115rpx;
+  top: 300rpx;
+  background-color: #fff;
+  border-radius: 25rpx;
+}
+
+.moduleWrite-text{
+  font-size: 26rpx;
+  color: #252525;
+  text-align: center;
+  margin-top: 80rpx;
+}
+
+.moduleWrite-button{
+  display: flex;
+  margin-top: 100rpx;
+  border-top: 1px solid #F5F6F8;
+}
+
+.moduleWrite-btn{
+  background-color: #fff;
+  border-radius: 25rpx;
+}
+
+.colorQu{
+  color: #94918F;
+}
+
+.colorQue{
+  color: #ee0a24;
 }

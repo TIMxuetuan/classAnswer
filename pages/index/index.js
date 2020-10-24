@@ -5,59 +5,15 @@ const Service = require("../../Services/services")
 Page({
   data: {
     isThreeType: 2,//1：代表用户进行手机号授权， 2：代表用户信息授权， 0：代表已登录
-    isSelectSubject: true, //true代表未选择项目， false代表选择过项目
+    isSelectSubject: false, //true代表未选择项目， false代表选择过项目
     switchShow: false, //控制科目弹出层
+    userInfoData: '', //用户数据
     //科目选择属性
     mainActiveIndex: 0,
     activeId: null,
-    items: [
-      {
-        text: '一级建造师',
-        children: [
-          {
-            text: '管理',
-            id: 1,
-          },
-          {
-            text: '建造',
-            id: 2,
-          },
-        ],
-      },
-      {
-        text: '二级建造师',
-        children: [
-          {
-            text: '造价',
-            id: 1,
-          },
-          {
-            text: '管理',
-            id: 2,
-          },
-        ],
-      },
-      {
-        text: '二级建造师',
-        children: [
-          {
-            text: '造价',
-            id: 1,
-          },
-          {
-            text: '管理',
-            id: 2,
-          },
-        ],
-      },
-    ],
-
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-
+    items: [],
     fileList: [],
+    phoneModuleShow: false, //控制提示手机号授权弹窗
   },
 
   //点击选择科目--出来弹窗
@@ -70,11 +26,6 @@ Page({
   //关闭选择科目弹窗
   onClose() {
     this.setData({ switchShow: false });
-  },
-
-  //点击注册按钮
-  getPhoneNumber() {
-    console.log("注册")
   },
 
   //科目弹窗--点击一级菜单
@@ -90,87 +41,122 @@ Page({
     console.log("二级菜单", e.detail)
     const activeId = this.data.activeId === e.detail.id ? null : e.detail.id;
     this.setData({ activeId });
-  },
-
-  afterRead(event) {
-    const { file } = event.detail;
-
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-    wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
-      filePath: file.path,
-      name: 'file',
-      // capture: "['album', 'camera']",
-      formData: { user: 'test' },
-      success(res) {
-        // 上传完成需要更新 fileList
-        const { fileList = [] } = this.data;
-        fileList.push({ ...file, url: res.data });
-        this.setData({ fileList });
-      },
-    });
-  },
-
-  //上传图片
-  choice: function () {
-    var that = this
-    wx.chooseImage({
-      count: 1, // 默认9 
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
-      sourceType: ['camera', 'album'], // 可以指定来源是相册还是相机，默认二者都有 
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
-        var tempFilePaths = res.tempFilePaths
-        that.setData({
-          textHidden: true,
-          image_photo: tempFilePaths,
-          photoHidden: false
+    let allLists = this.data.items
+    let newproject = {}
+    for (let index = 0; index < allLists.length; index++) {
+      var item = allLists[index]
+      if (e.detail.p_id == item.id) {
+        console.log(item)
+        newproject["fuData"] = item
+        var fuData = newproject["fuData"]
+        fuData["children"] = e.detail
+        fuData["index"] = index
+        this.setData({
+          newproject: newproject,
+          isSelectSubject: true,
+          switchShow: false
+        });
+        wx.setStorage({
+          key: "newproject",
+          data: newproject
         })
+
+      }
+
+    }
+  },
+
+  //跳转答疑解惑页面
+  goToQuestion() {
+    var that = this
+    console.log("跳转答疑解惑页面")
+    wx.getStorage({
+      key: 'userInfoData',
+      success(res) {
+        console.log(res)
+        that.setData({
+          userInfoData: res.data,
+        })
+      }
+    })
+    if (that.data.userInfoData == '') {
+      wx.showToast({
+        title: "请进行登录",
+        icon: 'none',
+        duration: 1000
+      });
+      return
+    } else {
+      wx.navigateTo({
+        url: "/pages/questionAnswer/questionAnswer",
+      })
+    }
+
+  },
+
+  //点击注册按钮--手机号授权弹窗
+  getPhoneNumber(e) {
+    console.log("注册", e)
+    console.log("用户id", this.data.wechat_id)
+    let dataLists = {
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv,
+      wechat_id: this.data.wechat_id
+    }
+    let jiamiData = {
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv,
+      wechat_id: this.data.wechat_id
+    }
+    Service.number(dataLists, jiamiData).then(res => {
+      if (res.event == 100) {
+        this.setData({
+          user_phone: res.data,
+          phoneModuleShow: false,
+        })
+        // wx.setStorage({
+        //   key: "user_phone",
+        //   data: res.data
+        // })
       }
     })
   },
 
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
+
+  //取消手机号提示弹窗
+  phoneModuleOff() {
+    this.setData({
+      phoneModuleShow: false
     })
   },
 
+  onLoad: function () {
+    // this.judgeUserInfo()
 
-  //跳转答疑解惑页面
-  goToQuestion() {
-    console.log("跳转答疑解惑页面")
-    wx.navigateTo({
-      url: "/pages/questionAnswer/questionAnswer",
-    })
   },
 
-  //如果用户绑定了，初次登录需要授权
-  userInfoGetOpen() {
-    wx.login({
-      success: res => {
-        console.log(res)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        let code = res.code
-        let dataLists = {
-          code: code,
-        }
-        let jiamiData = {
-          code: code,
-        }
-        Service.getOpenId(dataLists, jiamiData).then(res => {
-          console.log(res)
-          if (res.event == 100) {
-            this.setData({
-              isShowSelect: true,
-              isTypeThree: 2,
-              user_phone: res.data.userInfo.mobile
-            })
-          } else if (res.event == 106) {
-            this.setData({
-              isShowSelect: true,
-              isTypeThree: 1
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this
+    wx.getStorage({
+      key: 'userInfoData',
+      success(res) {
+        that.setData({
+          userInfoData: res.data,
+          isThreeType: 0
+        })
+        console.log(that.data.userInfoData)
+        that.getParentAjax()
+        wx.getStorage({
+          key: 'newproject',
+          success(res) {
+            that.setData({
+              newproject: res.data,
+              isSelectSubject: true,
+              activeId: res.data.fuData.children.id,
+              mainActiveIndex: res.data.fuData.index,
             })
           }
         })
@@ -178,30 +164,6 @@ Page({
     })
   },
 
-  onLoad: function () {
-  },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that = this
-  },
-
-  userLogin() {
-    wx.login({
-      success: res => {
-        console.log(res)
-      }
-    })
-  },
 
   //判断用户信息是否获取
   judgeUserInfo() {
@@ -219,16 +181,23 @@ Page({
             let jiamiData = {
               code: code,
             }
-            Service.getOpenId(dataLists, jiamiData).then(res => {
+            Service.userIf(dataLists, jiamiData).then(res => {
               if (res.event == 100) {
                 console.log("aaa", res)
                 this.setData({
                   userInfoData: res.data,
+                  wechat_id: res.data.id,
                   isThreeType: 0
                 })
+                wx.setStorage({
+                  key: "userInfoData",
+                  data: res.data
+                })
                 this.reserveUserInfo(res.data, userInfo)
-                if(res.mobile == ''){
-                  
+                if (res.data.mobile == '') {
+                  this.setData({
+                    phoneModuleShow: true
+                  })
                 }
               }
               // wx.setStorage({
@@ -268,8 +237,66 @@ Page({
     })
   },
 
-  //获取手机号信息
-  getNumberList(){
+  //获取项目类别
+  getParentAjax() {
+    let dataLists = {
+    }
+    let jiamiData = {
+    }
+    Service.parentAjax(dataLists, jiamiData).then(res => {
+      if (res.event == 100) {
+        this.manageParent(res.data)
+      }
+    })
+  },
 
-  }
+  //对项目数据进行处理
+  manageParent(list) {
+    console.log(list)
+    let obj = list.map(function (item) {
+      let cities = item.cities
+      let objChild = cities.map(function (items) {
+        return {
+          "id": items.id,
+          "text": items.lb,
+          "p_id": items.p_id,
+        }
+      })
+      return {
+        "id": item.id,
+        "text": item.lb,
+        "p_id": item.p_id,
+        "children": objChild
+      }
+    })
+    this.setData({
+      items: obj
+    })
+  },
+
+  //跳转历史记录页面
+  goToHistory() {
+    var that = this
+    wx.getStorage({
+      key: 'userInfoData',
+      success(res) {
+        console.log(res)
+        that.setData({
+          userInfoData: res.data,
+        })
+      }
+    })
+    if (that.data.userInfoData == '') {
+      wx.showToast({
+        title: "请进行登录",
+        icon: 'none',
+        duration: 1000
+      });
+      return
+    } else {
+      wx.navigateTo({
+        url: "/pages/answerRecord/answerRecord",
+      })
+    }
+  },
 })

@@ -3,7 +3,10 @@
     "van-field": "/vant/field/index",
     "van-uploader": "/vant/uploader/index",
     "van-icon": "/vant/icon/index",
-    "van-button": "/vant/button/index"
+    "van-button": "/vant/button/index",
+    "van-popup": "/vant/popup/index",
+    "van-tree-select": "/vant/tree-select/index",
+    "van-dialog": "/vant/dialog/index"
   },
   "navigationBarTitleText": "中题帮"
 }

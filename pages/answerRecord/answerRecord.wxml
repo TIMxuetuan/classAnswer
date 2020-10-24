@@ -1,0 +1,49 @@
+<!--pages/answerRecord/answerRecord.wxml-->
+<view class="answer-record">
+  <view class="answerRecord-module">
+    <view class="answerModule-item" data-item="{{item}}" wx:for="{{allLists}}" wx:key="index" wx:for-item="item" wx:for-index="index" bindtap="goToMyQuestion">
+      <view class="item-feedback">
+        <!--0待回复.1待反馈.2已解决 -->
+        <view wx:if="{{item.state == 0}}" class="feedbackRight waitReplyColor">待回复</view>
+        <view wx:elif="{{item.state == 1}}" class="feedbackRight fanKuiColor">待反馈</view>
+        <view wx:elif="{{item.state == 2}}" class="feedbackRight jieJueColor">已解决</view>
+      </view>
+      <view class="item-title">
+        {{item.lb_id}}
+      </view>
+      <!--中间详细信息-->
+      <view class="item-content">
+        <view class="itemContent-head">
+          <view class="contentHead-left">
+            <view>
+              <image class="headLeft-img" src="{{userInfoData.avatarUrl}}"></image>
+            </view>
+            <view class="headLeft-user">
+              <view>{{item.wechatName}}</view>
+              <view>{{item.create_time}}</view>
+            </view>
+          </view>
+          <view class="contentHead-right">来源：{{item.source}}</view>
+        </view>
+        <view class="itemContent-wordse" wx:if="{{item.wordse != ''}}">
+          {{item.wordse}}
+        </view>
+        <view class="itemContent-wordse" wx:else>
+          暂无描述
+        </view>
+      </view>
+      <!--反馈操作-->
+      <view class="item-operation">
+        <view class="operation-time">{{item.up_sj}}</view>
+        <view class="operation-right">
+          <view class="operation-tu">
+            <image class="operation-img" src="../../image/paizhao.png"></image>
+          </view>
+          <view wx:if="{{item.state == 0}}" class="operation-btn">去回复</view>
+          <view wx:elif="{{item.state == 1}}" class="operation-btn">去反馈</view>
+          <view wx:elif="{{item.state == 2}}" class="operation-btn">已解决</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

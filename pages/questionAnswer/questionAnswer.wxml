@@ -15,13 +15,13 @@
   </view>
 
   <!--科目展示-->
-  <view class="subjects-show">
+  <view class="subjects-show" bindtap="switchCourse">
     <view class="subjects-left">
       <view>
         <image class="subjectsShow-img" src="../../image/biaoqian.png"></image>
       </view>
       <view class="subjects-text">
-        <text class="subjectsText-item">一级建造师 管理</text>
+        <text class="subjectsText-item">{{newproject.fuData.text}} {{newproject.fuData.children.text}}</text>
         <text class="subjectsText-explain">（选择您想要问的项目,科目）</text>
       </view>
     </view>
@@ -32,6 +32,11 @@
 
   <!--发表按钮-->
   <view class="publish-button">
-    <van-button color="#0998FF">发表</van-button>
+    <van-button color="#0998FF" bindtap="publishBtn">发表</van-button>
   </view>
 </view>
+
+<van-popup show="{{ switchShow }}" position="top" custom-style="height: 60%;" bind:close="onClose">
+  <van-tree-select items="{{ items }}" height="360" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}"
+    bind:click-nav="onClickNav" bind:click-item="onClickItem" />
+</van-popup>

@@ -13,10 +13,6 @@ App({
       success: res => {
         console.log(res)
         if (res.authSetting['scope.userInfo']) {
-          //跳首页
-          // wx.switchTab({
-          //   url: '/pages/index/index'
-          // })
           // 已经授权，可以直接调用 登录
           wx.login({
             success: res => {
@@ -32,11 +28,11 @@ App({
                   let jiamiData = {
                     code: code,
                   }
-                  Service.getOpenId(dataLists, jiamiData).then(res => {
+                  Service.userIf(dataLists, jiamiData).then(res => {
                     console.log("aaa",res)
                     wx.setStorage({
-                      key: "cache_key",
-                      data: res.data.cache_key
+                      key: "userInfoData",
+                      data: res.data
                     })
                   })
                   // 可以将 res 发送给后台解码出 unionId
@@ -47,13 +43,7 @@ App({
             }
           })
 
-        } else {
-          //跳选择项目
-          console.log("跳选择项目")
-          // wx.reLaunch({
-          //   url: '/pages/selectStudyItem/selectStudyItem'
-          // })
-        }
+        } 
       },
       fail: error => {
         console.log(error)

@@ -1,0 +1,47 @@
+<!--pages/myQuestions/myQuestions.wxml-->
+<view class="myContainer">
+  <view class="my-question">
+    <!--问题数据展示-->
+    <view class="question-container">
+
+      <view class="container-head">
+        <view><image class="head-img" src="{{userInfoData.avatarUrl}}"></image></view>
+        <view class="head-text">
+          <view class="text-name">{{userInfoData.nickName}}</view>
+          <view class="text-time">{{allLists.create_time}}</view>
+        </view>
+      </view>
+
+      <view class="container-wordse">
+        <view class="wordse-label">
+          <image class="wordseLabel-img" src="../../image/biaoqian.png"></image>
+          <text class="wordseLabel-text">{{allLists.lb_id}} {{allLists.kmlb}}</text>
+        </view>
+        <text class="wordse-details">{{allLists.wordse}}</text>
+      </view>
+
+      <view class="container-imgs">
+        <image wx:for="{{allLists.img}}" wx:key="index" wx:for-item="item" wx:for-index="index" class="containerImg" src="{{item}}"></image>
+      </view>
+    </view>
+
+    <!--灰色分隔块-->
+    <view class="huiModule"></view>
+
+    <!--评论模块-->
+    <view></view>
+  </view>
+  <!--固定在页脚-解决按钮-->
+  <view class="fiex-footer">
+    <view class="footer-item" data-type="1" bindtap="solveQuestion">
+      <image wx:if="{{allLists.state != 2}}" class="footerItem-img" src="../../image/on_jiejue.png"></image>
+      <image wx:else class="footerItem-img" src="../../image/jiejue.png"></image>
+      <text class="footerItem-text">问题解决了</text>
+    </view>
+    <view class="footer-item" data-type="2" bindtap="solveQuestion">
+      <image wx:if="{{allLists.state == 2}}" class="footerItem-img" src="../../image/no_jiejue.png"></image>
+      <image wx:else class="footerItem-img" src="../../image/on_no_jiejue.png"></image>
+      <text class="footerItem-text">问题没有解决</text>
+    </view>
+  </view>
+</view>

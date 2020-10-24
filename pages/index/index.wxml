@@ -37,8 +37,8 @@
       <view class="switchLeft">
         <view class="switchLeft-title" wx:if="{{!isSelectSubject}}">请选择项目</view>
         <view class="switchLeft-content" wx:else>
-          <view>管理</view>
-          <view>一级建造师</view>
+          <view>{{newproject.fuData.children.text}}</view>
+          <view>{{newproject.fuData.text}}</view>
         </view>
       </view>
       <view>
@@ -53,7 +53,7 @@
   </view>
 
   <!--历史记录-->
-  <view class="historyFile">
+  <view class="historyFile" bindtap="goToHistory">
     有新消息！快来查看历史记录
   </view>
 </view>
@@ -64,6 +64,13 @@
 </van-popup>
 
 <!--手机号授权提示弹窗-->
-<view class="">
-
+<view wx:if="{{phoneModuleShow}}">
+  <view class="phone-module"></view>
+  <view class="module-write">
+    <view class="moduleWrite-text">请授权手机号，了解更多内容</view>
+    <view class="moduleWrite-button">
+      <button class="moduleWrite-btn colorQu" bindtap="phoneModuleOff">取消</button>
+      <button class="moduleWrite-btn colorQue" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+    </view>
+  </view>
 </view>

@@ -2,6 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/questionAnswer/questionAnswer",
+    "pages/answerRecord/answerRecord",
+    "pages/myQuestions/myQuestions",
     "pages/logs/logs"
   ],
   "window":{

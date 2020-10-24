@@ -1,0 +1,139 @@
+/* pages/answerRecord/answerRecord.wxss */
+.answer-record {
+  padding: 50rpx 30rpx;
+}
+
+.answerModule-item {
+  width: 690rpx;
+  height: 422rpx;
+  box-shadow: 0px 3rpx 22rpx 0px rgba(0, 0, 0, 0.05);
+  border-radius: 20rpx;
+  background-color: #fff;
+  margin-bottom: 38rpx;
+}
+
+.item-feedback {
+  width: 100%;
+  height: 42rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.feedbackRight {
+  width: 122rpx;
+  height: 42rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 42rpx;
+}
+
+.waitReplyColor {
+  background-color: #EC6941;
+}
+
+.fanKuiColor{
+  background-color: #0998FF;
+}
+
+.jieJueColor{
+  background-color: #E4E4E4;
+  color: #999999;
+}
+
+.item-title {
+  padding: 0 30rpx;
+  margin-bottom: 26rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.item-content {
+  padding: 20rpx 0 0;
+  margin: 0 auto;
+  width: 630rpx;
+  height: 250rpx;
+  border-top: 1px solid #F4F4F4;
+  border-bottom: 1px solid #F4F4F4;
+  box-sizing: border-box;
+}
+
+.itemContent-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contentHead-left {
+  display: flex;
+}
+
+.headLeft-img {
+  width: 58rpx;
+  height: 58rpx;
+  margin-right: 18rpx;
+  border-radius: 50%;
+}
+
+.headLeft-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #333333;
+}
+
+.contentHead-right {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #666666;
+}
+
+.itemContent-wordse {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #666666;
+  line-height: 46rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  align-content: center;
+}
+
+.item-operation {
+  height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.operation-time {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #999999;
+}
+
+.operation-right{
+  display: flex;
+  align-items: center;
+}
+
+.operation-img {
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 20rpx;
+}
+
+.operation-btn {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #999999;
+}
