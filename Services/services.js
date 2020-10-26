@@ -46,6 +46,16 @@ const Services = {
   solve(data, jiamiData) {
     return request._post(`${config.api}/Zkbxcx/solve`, data, jiamiData, 2)
   },
+
+  //回复老师评论
+  reply(data, jiamiData) {
+    return request._post(`${config.api}/Zkbxcx/reply`, data, jiamiData, 2)
+  },
+
+  //投诉回复
+  complain(data, jiamiData) {
+    return request._post(`${config.api}/Zkbxcx/complain`, data, jiamiData, 2)
+  },
 }
 
 module.exports = Services

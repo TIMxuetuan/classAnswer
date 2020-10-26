@@ -18,7 +18,8 @@
           <image class="headLogin-img" src="../../image/morentouxing.png"></image>
         </view>
         <view class="noLogin">
-          <button class="noLoginBtn" open-type="getUserInfo" bindgetuserinfo="judgeUserInfo">点击登录</button>
+          <view class="noLogin-text">亲，</view>
+          <button class="noLoginBtn" open-type="getUserInfo" bindgetuserinfo="judgeUserInfo">请登录</button>
         </view>
       </view>
       <!--已注册登录-->
@@ -32,19 +33,33 @@
       </view>
     </view>
 
-    <!--切换科目-->
-    <view class="switch-subject" bindtap="switchCourse">
-      <view class="switchLeft">
-        <view class="switchLeft-title" wx:if="{{!isSelectSubject}}">请选择项目</view>
-        <view class="switchLeft-content" wx:else>
-          <view>{{newproject.fuData.children.text}}</view>
-          <view>{{newproject.fuData.text}}</view>
-        </view>
+
+    <view class="leftContainer">
+      <!--历史记录-->
+      <view class="leftContainer-history" bindtap="goToHistory">
+        <image class="historyImg" src="../../image/lishi.png"></image>
+        <text class="historyText">历史记录</text>
       </view>
       <view>
-        <image class="switchImg" src="../../image/qiehuan.png"></image>
+        <!--切换科目-->
+        <view class="switch-subject" bindtap="switchCourse">
+          <view class="switchLeft">
+            <view class="switchLeft-title" wx:if="{{!isSelectSubject}}">
+              <view>科目</view>
+              <view>请选择项目</view>
+            </view>
+            <view class="switchLeft-content" wx:else>
+              <view class="five">{{newproject.fuData.children.text}}</view>
+              <view class="five">{{newproject.fuData.text}}</view>
+            </view>
+          </view>
+          <view>
+            <image class="switchImg" src="../../image/qiehuan.png"></image>
+          </view>
+        </view>
       </view>
     </view>
+
   </view>
 
   <!--中间内容--答疑解惑-->
@@ -53,9 +68,9 @@
   </view>
 
   <!--历史记录-->
-  <view class="historyFile" bindtap="goToHistory">
+  <!-- <view class="historyFile">
     有新消息！快来查看历史记录
-  </view>
+  </view> -->
 </view>
 
 <van-popup show="{{ switchShow }}" position="top" custom-style="height: 60%;" bind:close="onClose">
@@ -70,7 +85,8 @@
     <view class="moduleWrite-text">请授权手机号，了解更多内容</view>
     <view class="moduleWrite-button">
       <button class="moduleWrite-btn colorQu" bindtap="phoneModuleOff">取消</button>
-      <button class="moduleWrite-btn colorQue" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+      <button class="moduleWrite-btn colorQue" open-type="getPhoneNumber"
+        bindgetphonenumber="getPhoneNumber">确定</button>
     </view>
   </view>
 </view>

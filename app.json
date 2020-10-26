@@ -4,6 +4,7 @@
     "pages/questionAnswer/questionAnswer",
     "pages/answerRecord/answerRecord",
     "pages/myQuestions/myQuestions",
+    "pages/myQuestionsReply/myQuestionsReply",
     "pages/logs/logs"
   ],
   "window":{

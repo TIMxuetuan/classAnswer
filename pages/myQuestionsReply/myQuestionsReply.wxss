@@ -1,0 +1,36 @@
+/* pages/myQuestionsReply/myQuestionsReply.wxss */
+.uploadPictures {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30rpx;
+}
+
+.van-uploader__wrapper {
+  width: 690rpx !important;
+}
+
+.van-uploader__preview {
+  margin: 0 16rpx 16rpx 0 !important;
+}
+
+.van-uploader__preview:nth-child(4n) {
+  margin: 0 0 16rpx 0 !important;
+}
+
+.van-uploader__upload {
+  margin: 0 0 16rpx 0 !important;
+}
+
+.popupBtn {
+  margin: 50rpx auto;
+  display: flex;
+  justify-content: center;
+}
+
+.popupBtn .van-button {
+  width: 600rpx;
+  height: 100rpx;
+  padding: 0;
+  font-size: 36rpx;
+  font-weight: bold;
+}

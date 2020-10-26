@@ -4,6 +4,7 @@ const app = getApp()
 const Service = require("../../Services/services")
 Page({
   data: {
+    isType: true,
     isThreeType: 2,//1：代表用户进行手机号授权， 2：代表用户信息授权， 0：代表已登录
     isSelectSubject: false, //true代表未选择项目， false代表选择过项目
     switchShow: false, //控制科目弹出层
@@ -14,13 +15,46 @@ Page({
     items: [],
     fileList: [],
     phoneModuleShow: false, //控制提示手机号授权弹窗
+    newproject: null,
+  },
+
+  //检查方法--当用户没有登录时，弹出提示
+  examineLogin() {
+    let userInfoData = this.data.userInfoData
+    console.log(userInfoData)
+    console.log(userInfoData.nickName)
+    if (userInfoData.nickName == '' || typeof (userInfoData.nickName) == 'undefined') {
+      wx.showToast({
+        title: "请进行登录",
+        icon: 'none',
+        duration: 1000
+      });
+      this.setData({
+        isType: false
+      })
+    } else if (userInfoData.mobile == '' || typeof (userInfoData.mobile) == 'undefined') {
+      this.setData({
+        isType: false,
+        phoneModuleShow: true
+      })
+    } else {
+      this.setData({
+        isType: true
+      })
+    }
   },
 
   //点击选择科目--出来弹窗
   switchCourse() {
-    this.setData({
-      switchShow: true
-    })
+    this.examineLogin()
+    let isType = this.data.isType
+    console.log(isType)
+    if (isType) {
+      this.getParentAjax()
+      this.setData({
+        switchShow: true
+      })
+    }
   },
 
   //关闭选择科目弹窗
@@ -68,30 +102,34 @@ Page({
 
   //跳转答疑解惑页面
   goToQuestion() {
-    var that = this
-    console.log("跳转答疑解惑页面")
-    wx.getStorage({
-      key: 'userInfoData',
-      success(res) {
-        console.log(res)
-        that.setData({
-          userInfoData: res.data,
+    // var that = this
+    // console.log("跳转答疑解惑页面")
+    // wx.getStorage({
+    //   key: 'userInfoData',
+    //   success(res) {
+    //     console.log(res)
+    //     that.setData({
+    //       userInfoData: res.data,
+    //     })
+    //   }
+    // })
+    console.log(this.data.newproject)
+    this.examineLogin()
+    let isType = this.data.isType
+    console.log(isType)
+    if (isType) {
+      if (this.data.newproject != null) {
+        wx.navigateTo({
+          url: "/pages/questionAnswer/questionAnswer",
         })
+      } else {
+        wx.showToast({
+          title: "请选择项目",
+          icon: 'none',
+          duration: 1000
+        });
       }
-    })
-    if (that.data.userInfoData == '') {
-      wx.showToast({
-        title: "请进行登录",
-        icon: 'none',
-        duration: 1000
-      });
-      return
-    } else {
-      wx.navigateTo({
-        url: "/pages/questionAnswer/questionAnswer",
-      })
     }
-
   },
 
   //点击注册按钮--手机号授权弹窗
@@ -114,6 +152,7 @@ Page({
           user_phone: res.data,
           phoneModuleShow: false,
         })
+        this.judgeUserInfo()
         // wx.setStorage({
         //   key: "user_phone",
         //   data: res.data
@@ -145,10 +184,10 @@ Page({
       success(res) {
         that.setData({
           userInfoData: res.data,
-          isThreeType: 0
+          isThreeType: 0,
+          wechat_id:res.data.id
         })
         console.log(that.data.userInfoData)
-        that.getParentAjax()
         wx.getStorage({
           key: 'newproject',
           success(res) {
@@ -184,6 +223,11 @@ Page({
             Service.userIf(dataLists, jiamiData).then(res => {
               if (res.event == 100) {
                 console.log("aaa", res)
+                wx.showToast({
+                  title: "登录成功",
+                  icon: 'none',
+                  duration: 1000
+                });
                 this.setData({
                   userInfoData: res.data,
                   wechat_id: res.data.id,
@@ -276,24 +320,20 @@ Page({
 
   //跳转历史记录页面
   goToHistory() {
-    var that = this
-    wx.getStorage({
-      key: 'userInfoData',
-      success(res) {
-        console.log(res)
-        that.setData({
-          userInfoData: res.data,
-        })
-      }
-    })
-    if (that.data.userInfoData == '') {
-      wx.showToast({
-        title: "请进行登录",
-        icon: 'none',
-        duration: 1000
-      });
-      return
-    } else {
+    // var that = this
+    // wx.getStorage({
+    //   key: 'userInfoData',
+    //   success(res) {
+    //     console.log(res)
+    //     that.setData({
+    //       userInfoData: res.data,
+    //     })
+    //   }
+    // })
+    this.examineLogin()
+    let isType = this.data.isType
+    console.log(isType)
+    if (isType) {
       wx.navigateTo({
         url: "/pages/answerRecord/answerRecord",
       })

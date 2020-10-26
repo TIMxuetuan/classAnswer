@@ -17,11 +17,11 @@ let ajax = function (obj) {
   obj.complete = function (res) {
     console.log("res", res)
     if (res.data.event == 100) {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 2000
-      });
+      // wx.showToast({
+      //   title: res.data.msg,
+      //   icon: 'none',
+      //   duration: 2000
+      // });
     }
   }
   return new Promise((resolve, reject) => {

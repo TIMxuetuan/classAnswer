@@ -106,7 +106,14 @@ Page({
     Service.circle(dataLists, jiamiData).then(res => {
       console.log(res)
       if (res.event == 100) {
-
+        wx.navigateBack({
+          delta: 1
+        })
+        wx.showToast({
+          title: "发表成功",
+          icon: 'none',
+          duration: 1000
+        });
       }
     })
   },

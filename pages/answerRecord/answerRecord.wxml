@@ -1,6 +1,6 @@
 <!--pages/answerRecord/answerRecord.wxml-->
 <view class="answer-record">
-  <view class="answerRecord-module">
+  <view class="answerRecord-module" wx:if="{{allLists != ''}}">
     <view class="answerModule-item" data-item="{{item}}" wx:for="{{allLists}}" wx:key="index" wx:for-item="item" wx:for-index="index" bindtap="goToMyQuestion">
       <view class="item-feedback">
         <!--0待回复.1待反馈.2已解决 -->
@@ -45,5 +45,10 @@
         </view>
       </view>
     </view>
+  </view>
+
+  <!--暂无数据-->
+  <view class="zanWu" wx:else>
+    暂无问题
   </view>
 </view>

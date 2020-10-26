@@ -8,7 +8,8 @@ Page({
   data: {
     page: 1,
     size: 10,
-    allLists:[]
+    allLists: [],
+    oldlists:[], //老数据
   },
 
   //获得答疑历史记录
@@ -23,18 +24,29 @@ Page({
       page: this.data.page,
       size: this.data.size,
     }
+    wx.showLoading({
+      title: '加载中...',
+    })
     Service.circleHistory(dataLists, jiamiData).then(res => {
       console.log(res)
       if (res.event == 100) {
+        //获取上次加载的数据
+        var oldlists = this.data.oldlists;
+        var newlists = oldlists.concat(res.list) //合并数据 res.data 你的数组数据
         this.setData({
-          allLists: res.list
+          allLists: newlists,
+          total: res.num,
         })
+        console.log(this.data.allLists)
+        wx.hideLoading();
+      } else {
+        wx.hideLoading();
       }
     })
   },
 
   //跳转我的问题页面 -- 详情页
-  goToMyQuestion(e){
+  goToMyQuestion(e) {
     console.log(e.currentTarget.dataset.item)
     let id = e.currentTarget.dataset.item.id
     wx.navigateTo({
@@ -97,7 +109,23 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    //console.log("加载更多")
+    if (this.data.allLists.length < this.data.total) {
+      var page = this.data.page
+      page++
+      this.setData({
+        oldlists: this.data.allLists,
+        page: page
+      })
+      this.getAnswerRecordList()
+    } else {
+      wx.showToast({
+        title: '到底了',
+        icon: 'none',
+        duration: 2000
+      });
 
+    }
   },
 
   /**

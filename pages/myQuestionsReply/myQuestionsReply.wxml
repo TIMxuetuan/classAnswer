@@ -1,0 +1,19 @@
+<view class="tanSwitch">
+  <!--文本框-->
+  <view>
+    <van-cell-group>
+      <van-field value="{{ message }}" type="textarea" placeholder="输入题目内容" autosize="{{textAutosize}}"
+        border="{{ false }}" bind:change="onChange" />
+    </van-cell-group>
+  </view>
+  <!--上传图片-->
+  <view class="uploadPictures">
+    <van-uploader file-list="{{ fileList }}" max-count="9" deletable="{{ true }}" show-upload="false"
+      bind:after-read="afterRead" bind:delete="deleteImg" />
+  </view>
+
+  <!--按钮-->
+  <view class="popupBtn">
+    <van-button color="#0998FF" bindtap="publishBtn">回复</van-button>
+  </view>
+</view>

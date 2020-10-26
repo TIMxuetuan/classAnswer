@@ -137,3 +137,8 @@
   font-weight: 500;
   color: #999999;
 }
+
+.zanWu{
+  font-size: 30rpx;
+  text-align: center;
+}

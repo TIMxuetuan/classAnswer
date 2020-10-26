@@ -5,7 +5,9 @@
     <view class="question-container">
 
       <view class="container-head">
-        <view><image class="head-img" src="{{userInfoData.avatarUrl}}"></image></view>
+        <view>
+          <image class="head-img" src="{{userInfoData.avatarUrl}}"></image>
+        </view>
         <view class="head-text">
           <view class="text-name">{{userInfoData.nickName}}</view>
           <view class="text-time">{{allLists.create_time}}</view>
@@ -21,7 +23,8 @@
       </view>
 
       <view class="container-imgs">
-        <image wx:for="{{allLists.img}}" wx:key="index" wx:for-item="item" wx:for-index="index" class="containerImg" src="{{item}}"></image>
+        <image wx:for="{{allLists.img}}" wx:key="index" wx:for-item="item" wx:for-index="index" class="containerImg"
+          src="{{item}}"></image>
       </view>
     </view>
 
@@ -29,7 +32,90 @@
     <view class="huiModule"></view>
 
     <!--评论模块-->
-    <view></view>
+    <view wx:if="{{allLists.pl != ''}}" class="comment-module">
+      <view class="commentTitle">评论 {{allLists.pl.length}}</view>
+
+      <!--评论内容-->
+      <view class="commentDetails">
+        <view class="commentDetails-items" wx:for="{{allLists.pl}}" wx:key="index" wx:for-item="item"
+          wx:for-index="index">
+          <!--评论人信息-->
+          <view class="commentPerson">
+            <view class="commentPerson-left">
+              <view>
+                <image class="personLeft-img" src="../../image/morentouxing.png"></image>
+              </view>
+              <view class="personLeft-text">
+                <view>{{item.ygName}}</view>
+                <view>{{item.create_time}}</view>
+              </view>
+            </view>
+            <view class="commentPerson-right" wx:if="{{item.complain == 0}}" data-item="{{item}}" bindtap="complaintClick">
+              <view>
+                <image class="personRight-img" src="../../image/tousu.png"></image>
+              </view>
+              <view class="personRight-text">投诉</view>
+            </view>
+            <view class="commentPerson-right" wx:elif="{{item.complain == 1}}">
+              <view class="personRight-text">已投诉</view>
+            </view>
+          </view>
+
+          <!--评论人内容信息-->
+          <view class="commentMessage">
+            <view class="commentMessage-wordse">{{item.wordse}}</view>
+            <view class="container-imgs">
+              <image wx:for="{{item.imgs}}" wx:key="index" wx:for-item="itemImg" wx:for-index="index"
+                class="containerImg" src="{{itemImg}}"></image>
+            </view>
+          </view>
+
+          <!--回复功能模块-->
+          <view class="replyModule">
+            <view class="replyModule-right" data-item="{{item}}" bindtap="replyClick">
+              <image class="personRight-img" src="../../image/huifu.png"></image>
+              <view class="replyModule-text">回复</view>
+            </view>
+          </view>
+
+          <!--回复模块-->
+          <view class="replyConent" wx:if="{{item.erpl != '' && item.erpl != null}}">
+            <!--倒三角-->
+            <view class="daoThree"></view>
+            <view class="replyConent-item" wx:for="{{item.erpl}}" wx:key="index" wx:for-item="erplItem"
+              wx:for-index="index">
+              <!--评论人信息-->
+              <view class="commentPerson">
+                <view class="commentPerson-left">
+                  <view>
+                    <image class="personLeft-img" src="{{userInfoData.avatarUrl}}"></image>
+                  </view>
+                  <view class="personLeft-text">
+                    <view>{{erplItem.wechatName}}</view>
+                    <view>{{erplItem.create_time}}</view>
+                  </view>
+                </view>
+              </view>
+
+              <!--评论人内容信息-->
+              <view class="commentMessage">
+                <view class="commentMessage-wordse">{{erplItem.wordse}}</view>
+                <view class="container-imgs">
+                  <image wx:for="{{erplItem.imgs}}" wx:key="index" wx:for-item="erplItemImg" wx:for-index="index"
+                    class="replyConentImg" src="{{erplItemImg}}"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+
+    <!--评论模块--暂无数据的-->
+    <view wx:else class="zanWu">
+      暂无评论
+    </view>
   </view>
   <!--固定在页脚-解决按钮-->
   <view class="fiex-footer">
