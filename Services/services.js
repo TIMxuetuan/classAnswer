@@ -56,6 +56,11 @@ const Services = {
   complain(data, jiamiData) {
     return request._post(`${config.api}/Zkbxcx/complain`, data, jiamiData, 2)
   },
+
+  //中课帮）答疑获取积分
+  answerIntegral(data, jiamiData) {
+    return request._post(`${config.api}/Eleven/answerIntegral`, data, jiamiData, 2)
+  },
 }
 
 module.exports = Services

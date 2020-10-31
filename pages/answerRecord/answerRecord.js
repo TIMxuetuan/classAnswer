@@ -9,7 +9,7 @@ Page({
     page: 1,
     size: 10,
     allLists: [],
-    oldlists:[], //老数据
+    oldlists: [], //老数据
   },
 
   //获得答疑历史记录
@@ -58,7 +58,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
 
   /**

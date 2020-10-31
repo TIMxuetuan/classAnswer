@@ -161,6 +161,23 @@ Page({
     })
   },
 
+  //跳转双十一活动页面
+  goToHuodong(){
+    console.log(this.data.userInfoData.mobile)
+    if(this.data.userInfoData.mobile != ''){
+      wx.navigateTo({
+        url: "/pages/huoDong/huoDong?phone=" + this.data.userInfoData.mobile,
+      })
+    }else{
+      wx.showToast({
+        title: "请登录",
+        icon: 'none',
+        duration: 1000
+      });
+    }
+    
+  },
+
 
   //取消手机号提示弹窗
   phoneModuleOff() {
@@ -171,7 +188,11 @@ Page({
 
   onLoad: function () {
     // this.judgeUserInfo()
-
+    
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
 
   /**
@@ -185,7 +206,7 @@ Page({
         that.setData({
           userInfoData: res.data,
           isThreeType: 0,
-          wechat_id:res.data.id
+          wechat_id: res.data.id
         })
         console.log(that.data.userInfoData)
         wx.getStorage({

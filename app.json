@@ -5,7 +5,8 @@
     "pages/answerRecord/answerRecord",
     "pages/myQuestions/myQuestions",
     "pages/myQuestionsReply/myQuestionsReply",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/huoDong/huoDong"
   ],
   "window":{
     "backgroundTextStyle":"light",

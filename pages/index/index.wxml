@@ -67,6 +67,11 @@
     <image bindtap="goToQuestion" class="photographImg" src="../../image/paizhao.png"></image>
   </view>
 
+  <!--双十一活动-->
+  <view class="shuangActivity" bindtap="goToHuodong">
+    <image src="../../image/jiaonang.png"></image>
+  </view>
+
   <!--历史记录-->
   <!-- <view class="historyFile">
     有新消息！快来查看历史记录

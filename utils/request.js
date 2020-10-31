@@ -74,6 +74,7 @@ const getConfig = (isjson, params, jiamiData, level) => {
       reverse_key
         .reduce((rst, v) => (rst += `${v}=${obj[v]}&`), "")
         .slice(0, -1) + suffix;
+    console.log(resource_code)
     let sign = MD5.hexMD5(resource_code);
     // console.log("resource_code", resource_code);
 

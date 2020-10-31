@@ -19,6 +19,8 @@ Page({
     mainActiveIndex: 0,
     activeId: null,
     items: [],
+    isHuodong: false, //控制是否进行获取得分，每日次数够了，不在进行
+    fenShow: false, //控制得分弹窗
   },
 
   //输入框内容
@@ -106,15 +108,57 @@ Page({
     Service.circle(dataLists, jiamiData).then(res => {
       console.log(res)
       if (res.event == 100) {
-        wx.navigateBack({
-          delta: 1
-        })
+        // wx.navigateBack({
+        //   delta: 1
+        // })
         wx.showToast({
           title: "发表成功",
           icon: 'none',
           duration: 1000
         });
+        if (!this.data.isHuodong) {
+          this.getIntegral()
+        }
       }
+    })
+  },
+
+  //双十一活动，中课帮）答疑获取积分
+  getIntegral() {
+    console.log(this.data.userInfoData)
+    let dataLists = {
+      mobile: this.data.userInfoData.mobile
+    }
+    let jiamiData = {
+      mobile: this.data.userInfoData.mobile
+    }
+    Service.answerIntegral(dataLists, jiamiData).then(res => {
+      console.log(res)
+      if (res.event == 100) {
+        // wx.showToast({
+        //   title: res.msg,
+        //   icon: 'none',
+        //   duration: 1000
+        // });
+        this.setData({ fenShow: true });
+      } else {
+
+        // wx.setStorage({
+        //   key: "isHuodong",
+        //   data: true
+        // })
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
+  },
+
+  //关闭得分弹窗
+  fenShowClose() {
+    this.setData({ fenShow: false });
+    wx.navigateBack({
+      delta: 1
     })
   },
 
@@ -244,6 +288,14 @@ Page({
         })
       }
     })
+    // wx.getStorage({
+    //   key: 'isHuodong',
+    //   success(res) {
+    //     that.setData({
+    //       isHuodong: res.data
+    //     })
+    //   }
+    // })
   },
 
   /**

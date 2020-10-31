@@ -37,7 +37,7 @@
   border-bottom: 1px solid #F3F3F3;
 }
 
-.subjects-left{
+.subjects-left {
   display: flex;
   align-items: center;
 }
@@ -54,21 +54,32 @@
   font-weight: 500;
 }
 
-.subjectsText-explain{
+.subjectsText-explain {
   font-size: 24rpx;
   color: #FBAD35;
   font-weight: 500;
 }
 
-.publish-button{
+.publish-button {
   margin: 350rpx 0 236rpx 0;
   padding: 0 30rpx;
 }
 
-.publish-button .van-button{
+.publish-button .van-button {
   width: 690rpx;
   height: 100rpx;
   padding: 0;
   font-size: 36rpx;
   font-weight: bold;
+}
+
+/*双十一活动*/
+.fenShowImg {
+  width: 640rpx;
+  height: 600rpx;
+  margin-left: 80rpx;
+}
+
+.huoDong .van-popup {
+  background-color: transparent;
 }

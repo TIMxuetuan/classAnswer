@@ -40,3 +40,7 @@
   <van-tree-select items="{{ items }}" height="360" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}"
     bind:click-nav="onClickNav" bind:click-item="onClickItem" />
 </van-popup>
+
+<van-popup class="huoDong" show="{{ fenShow }}" bind:close="fenShowClose" close-on-click-overlay>
+  <image bindtap="fenShowClose" class="fenShowImg" src="https://vod.zhongjianedu.com/image/default/845F50CB895C42888C0A2A3F515628EE-6-2.gif"></image>
+</van-popup>

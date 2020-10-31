@@ -24,7 +24,7 @@
 
       <view class="container-imgs">
         <image wx:for="{{allLists.img}}" wx:key="index" wx:for-item="item" wx:for-index="index" class="containerImg"
-          src="{{item}}"></image>
+          src="{{item}}" data-list="{{allLists.img}}" data-src="{{item}}" bindtap='imgYu'></image>
       </view>
     </view>
 
@@ -65,8 +65,8 @@
           <view class="commentMessage">
             <view class="commentMessage-wordse">{{item.wordse}}</view>
             <view class="container-imgs">
-              <image wx:for="{{item.imgs}}" wx:key="index" wx:for-item="itemImg" wx:for-index="index"
-                class="containerImg" src="{{itemImg}}"></image>
+              <image wx:for="{{item.img}}" wx:key="index" wx:for-item="itemImg" wx:for-index="index"
+                class="containerImg" src="{{itemImg}}" data-list="{{item.img}}" data-src="{{itemImg}}" bindtap='imgYu'></image>
             </view>
           </view>
 
@@ -102,7 +102,7 @@
                 <view class="commentMessage-wordse">{{erplItem.wordse}}</view>
                 <view class="container-imgs">
                   <image wx:for="{{erplItem.imgs}}" wx:key="index" wx:for-item="erplItemImg" wx:for-index="index"
-                    class="replyConentImg" src="{{erplItemImg}}"></image>
+                    class="replyConentImg" src="{{erplItemImg}}" data-list="{{erplItem.imgs}}" data-src="{{erplItemImg}}" bindtap='imgYu'></image>
                 </view>
               </view>
             </view>

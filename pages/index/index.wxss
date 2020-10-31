@@ -31,7 +31,7 @@
   height: 80rpx;
 }
 
-.noLogin-text{
+.noLogin-text {
   font-size: 28rpx;
 }
 
@@ -196,4 +196,17 @@
 
 .colorQue {
   color: #ee0a24;
+}
+
+
+/*双十一活动*/
+.shuangActivity {
+  margin-top: 150rpx;
+  padding: 0 30rpx;
+  height: 210rpx;
+}
+
+.shuangActivity image{
+  width: 100%;
+  height: 100%;
 }

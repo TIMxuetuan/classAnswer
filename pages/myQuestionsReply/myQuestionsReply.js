@@ -85,18 +85,18 @@ Page({
     }
     let dataLists = {
       circle_id: this.data.allLists.id,
-      p_id:item.id,
-      wechat_id:this.data.userInfoData.id,
-      yg_id:item.yg_id,
-      wordse:this.data.message,
+      p_id: item.id,
+      wechat_id: this.data.userInfoData.id,
+      yg_id: item.yg_id,
+      wordse: this.data.message,
       img: imgLists,
     }
     let jiamiData = {
       circle_id: this.data.allLists.id,
-      p_id:item.id,
-      wechat_id:this.data.userInfoData.id,
-      yg_id:item.yg_id,
-      wordse:this.data.message,
+      p_id: item.id,
+      wechat_id: this.data.userInfoData.id,
+      yg_id: item.yg_id,
+      wordse: this.data.message,
       img: imgLists,
     }
     Service.reply(dataLists, jiamiData).then(res => {
@@ -118,6 +118,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // wx.showShareMenu({
+    //   withShareTicket: true,
+    //   menus: ['shareAppMessage', 'shareTimeline']
+    // })
     var that = this
     let item = JSON.parse(decodeURIComponent(options.item))
     let userInfoData = JSON.parse(decodeURIComponent(options.userInfoData))
@@ -125,7 +129,7 @@ Page({
     that.setData({
       item: item,
       userInfoData: userInfoData,
-      allLists:allLists
+      allLists: allLists
     })
     console.log(that.data.item)
     console.log(that.data.userInfoData)
