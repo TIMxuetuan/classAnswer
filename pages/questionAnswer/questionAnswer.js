@@ -19,6 +19,8 @@ Page({
     mainActiveIndex: 0,
     activeId: null,
     items: [],
+
+    //双十一活动，
     isHuodong: false, //控制是否进行获取得分，每日次数够了，不在进行
     fenShow: false, //控制得分弹窗
   },
@@ -108,17 +110,32 @@ Page({
     Service.circle(dataLists, jiamiData).then(res => {
       console.log(res)
       if (res.event == 100) {
-        // wx.navigateBack({
-        //   delta: 1
-        // })
         wx.showToast({
           title: "发表成功",
           icon: 'none',
+          duration: 1000,
+          success: function () {
+            setTimeout(function () {
+              //要延时执行的代码
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000) //延迟时间
+          },
+        });
+
+
+        //双十一活动，以后走这里
+        // if (!this.data.isHuodong) {
+        //   this.getIntegral()
+        // }
+      } else {
+       
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
           duration: 1000
         });
-        if (!this.data.isHuodong) {
-          this.getIntegral()
-        }
       }
     })
   },

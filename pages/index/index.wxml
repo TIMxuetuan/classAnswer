@@ -67,10 +67,10 @@
     <image bindtap="goToQuestion" class="photographImg" src="../../image/paizhao.png"></image>
   </view>
 
-  <!--双十一活动-->
-  <view class="shuangActivity" bindtap="goToHuodong">
+  <!--双十一活动-- 以后走这里 -->
+  <!-- <view class="shuangActivity" bindtap="goToHuodong">
     <image src="../../image/jiaonang.png"></image>
-  </view>
+  </view> -->
 
   <!--历史记录-->
   <!-- <view class="historyFile">

@@ -2,8 +2,14 @@
 const Service = require("./Services/services")
 
 App({
-  onLaunch: function () {
-
+  onLaunch: function (options) {
+    console.log("options ",options)
+    // let  zhongtiku = options.referrerInfo.extraData.zhongtiku 
+    // wx.showToast({
+    //   title: zhongtiku,
+    //   icon: 'success',
+    //   duration: 2000
+    // })
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
